@@ -1,6 +1,7 @@
 from sklearn import datasets, neighbors, linear_model
 import random
 from matplotlib import pyplot as plt
+import numpy as np
 print(__doc__)
 '''
 The iris dataset svm example is derived from;
@@ -31,14 +32,25 @@ print('KNN score: %f' % knn.fit(X_train, y_train).score(X_test, y_test))
 print('LogisticRegression score: %f'
       % logistic.fit(X_train, y_train).score(X_test, y_test))
 
+misidentified = [0]*10
+for x,y in zip(X_test,y_test):
+    if knn.predict([x]) != y:
+        misidentified[y] +=1
+
 # Set-up 2x2 grid for plotting.
 fig, sub = plt.subplots(1, 2)
 
 
 
-sub[0].set_title("title 1")
-sub[1].set_title("title 2")
+sub[0].set_title("Histogram of Mis identification")
+sub[0].bar([0,1,2,3,4,5,6,7,8,9],misidentified)
+sub[0].axis([0, 9, 0, 3],sharey=True)
 
-implot = plt.imshow(X_test[23].reshape(8,8))
+
+sub[1].set_title("Example of a Number")
+
+sub[1].imshow(X_test[23].reshape(8,8))
+sub[1].axis(visable=False)
+
 fig.show()
 
