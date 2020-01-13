@@ -1,0 +1,18 @@
+age -> Age
+
+sex -> Gender
+
+bmi -> Body mass index
+
+map -> Mean arterial pressure (average blood pressure)
+
+tc -> Total cholesterol (mg/dL)? Desirable range: below 200 mg/dL
+ldl -> Low-density lipoprotein ("bad" cholesterol)? Desirable range: below 130 mg/dL
+hdl -> High-density lipoprotein ("good" cholesterol)? Desirable range: above 40 mg/dL
+tch -> Blood serum measurement
+ltg -> Blood serum measurement
+glu -> Blood serum measurement (glucose?)
+
+y -> A quantitative measure of disease progression one year after baseline
+
+Details
