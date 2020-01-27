@@ -30,11 +30,13 @@ plt.show()
 # select just a few pixels create a random boolean mask
 boolean_mask = np.random.choice(a=[False, True], size=64)
 
+
 def get_mod_x(data,mask):
     mod_x = []
     for d in data:
         mod_x.append(d[mask])
     return mod_x
+
 
 def do_training_and_predicting(data, labels):
     # split the data set into training (80%) and test set(20%)
@@ -43,15 +45,36 @@ def do_training_and_predicting(data, labels):
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)
     # Import sklearn.metrics to model accuracy
-    print(f'Accuracy is : {metrics.accuracy_score(y_test, y_pred)}')
     return metrics.accuracy_score(y_test, y_pred)
 
 
 do_training_and_predicting(b.data, b.target)
 do_training_and_predicting(get_mod_x(b.data, boolean_mask), b.target)
 
+
+# try do GA population masks Initialise
+pop_size = 10
+elitism = 5
+count = 0
+solution_found = False
 population = []
 pop_X = []
-for i in range(10):
+for i in range(pop_size):
     population.append(np.random.choice(a=[False, True], size=64))
 
+while not solution_found and count < 10:
+    result = []
+    for i in range(10):
+        result.append(do_training_and_predicting(get_mod_x(b.data, population[i]), b.target))
+
+    # we keep top
+    elitism_idx = np.argsort(result[-elitism:])
+    new_population = []
+    for i in elitism_idx:
+        new_population.append(population[i])
+    for i in range(pop_size - elitism):
+        new_population.append(np.random.choice(a=[False, True], size=64))
+    population = new_population
+    print(f' best result = {result[np.argsort(result)[-1]]}')
+    print(f'\n\n generation {count}\n\n')
+    count = count + 1
