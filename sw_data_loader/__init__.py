@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+from .sw_utils flatten_image, unflatten_image
 
 
 class SWData:
