@@ -46,6 +46,7 @@ def get_result(bunch):
 
 print(f'our accuracy b is {get_result(b)}\n')
 
+# There is better way to create a bunch object (see new_cancer)
 new_b = Bunch()
 new_b.DESCR = DESCR
 new_b.data = d
@@ -53,9 +54,15 @@ new_b.target = labels
 new_b.target_names = labels_names
 new_b.featur_names = feature_names
 
-
 print(f'Our accuracy for new_b is {get_result(new_b)}\n')
 
 cancer = datasets.load_breast_cancer()
-print(f'value of breast cancer dataset is {get_result(cancer)}')
+print(f'value of breast cancer dataset is {get_result(cancer)}\n')
+
+new_cancer = Bunch(data=cancer.data, target=cancer.target)
+print(f'value of breast cancer dataset is {get_result(new_cancer)}\n')
+
+wine = datasets.load_wine()
+print(f'The result for wine dataset is {get_result(Bunch(data=wine.data, target=wine.target))}\n')
+
 
