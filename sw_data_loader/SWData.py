@@ -49,11 +49,9 @@ class SWData:
         self.base_path = ""
         self.data_classes = []
 
-
-print("run test")
-data = SWData()
-data.load_img_datafiles("I:/RES/TestFolder")
-print(data.base_path)
-print((len(data.data_classes)))
-
-print(data.is_datafiles_all_same_dim())
+    def getClass(self,class_name):
+        returned_data = []
+        for img in self.data_img:
+            if self.data_classes(img) == class_name:
+                returned_data.append(self.data_classes(img))
+        return returned_data
