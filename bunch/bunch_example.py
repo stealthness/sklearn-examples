@@ -41,7 +41,7 @@ def get_result(bunch):
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)
     time_finished = time()
-    return (accuracy_score(y_test, y_pred), time_finished - time_started)
+    return accuracy_score(y_test, y_pred), time_finished - time_started
 
 
 print(f'our accuracy b is {get_result(iris)[0]}\n')
@@ -52,7 +52,7 @@ new_iris.DESCR = DESCR
 new_iris.data = d
 new_iris.target = labels
 new_iris.target_names = labels_names
-new_iris.featur_names = feature_names
+new_iris.feature_names = feature_names
 
 result, time_taken = get_result(new_iris)
 print(f'Our accuracy for new_iris is {result}\nCompleted in {1000*time_taken:.3f}\n')
@@ -61,13 +61,12 @@ cancer = datasets.load_breast_cancer()
 result, time_taken = get_result(cancer)
 print(f'Our accuracy for cancer dataset is {result}\nCompleted in {1000*time_taken:.3f}\n')
 
-
+# Creating a new bunch object using cancer data, showing we get same result
 new_cancer = Bunch(data=cancer.data, target=cancer.target)
 result, time_taken = get_result(datasets.load_breast_cancer())
 print(f'Our accuracy for new_cancer dataset is {result}\nCompleted in {1000*time_taken:.3f}\n')
 
-
-
+# Apply same idea to another dataset
 wine = datasets.load_wine()
 result, time_taken = get_result(Bunch(data=wine.data, target=wine.target))
 print(f'Our accuracy for wine dataset is {result}\nCompleted in {1000*time_taken:.3f}\n')
