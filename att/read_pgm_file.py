@@ -23,10 +23,8 @@ import matplotlib.pyplot as plt
 
 def read_pgm(name):
     with open(name, 'rb') as f:
-        b = f.readline()
-        print(b)
         d = []
-        if b == b'P5\n':
+        if f.readline() == b'P5\n':
             b = f.readline()
             s = b.decode('utf-8').strip().split(" ")
             shape = (int(s[1]), int(s[0].strip()))

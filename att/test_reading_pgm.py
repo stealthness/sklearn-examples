@@ -1,10 +1,11 @@
 import errno
 import sys
-
+import random
 import numpy as np
 import os
 import matplotlib.pyplot as plt
 from PIL import Image
+from skimage.feature import hog
 from sklearn.utils import Bunch
 
 from att.read_pgm_file import read_pgm
@@ -38,22 +39,19 @@ When using these images, please give credit to AT&T Laboratories Cambridge.
 '''
 
 
-shape, max_value, img = read_pgm('D:\\RES\\ORL\\s1\\1.pgm')
-
-
 def read_images(path, sz=None):
     c = 0
     x = []
     y = []
     data = np.array([])
     target = np.array([])
-    print("QQQ")
+    shape = None
+    max_value = 0
     for dir_name, dir_names, filenames in os.walk(path):
         for sub_dir_name in dir_names:
             subject_path = os.path.join(dir_name, sub_dir_name)
             print(subject_path)
             for filename in os.listdir(subject_path):
-                print(filename)
                 try:
                     shape, max_value, img = read_pgm(subject_path+"\\"+filename)
                     x.append(img)
@@ -62,15 +60,27 @@ def read_images(path, sz=None):
                     print("I/O error ({0}) : {1} ".format(errno, os.strerror))
 
         c = c + 1
-    b = Bunch(DESCR=ATT_DESCR, data=x, target=y, path=path)
-    return b
+    return Bunch(DESCR=ATT_DESCR, data=np.array(x), target=y, path=path, shape=shape, max_value=max_value)
 
 
 b = read_images(ORL_PATH)
 print(f'the data set is {b.DESCR}')
-
 print(f'the data is located at {b.path}')
 
-# data_shape = b.data.shape
-# data_size = b.shape[0]
-# print(f'The shape of the data is {data_shape}, that is there are {data_size} number of images')
+
+data_shape = b.shape
+data_size = b.data.size
+print(f'The shape of the data is {data_shape}, that is there are {data_size} number of images')
+
+img = b.data[random.randint(0, 400-1)]
+plt.imshow(img.reshape((92, 112)), cmap='gray')
+plt.show()
+fd, hog_img = hog(img.reshape((92, 112)), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=False)
+plt.imshow(hog_img.rot90())
+plt.show()
+
+hog_fd = []
+for img in b.data:
+    print(f'img shape {len(img)}')
+    #fd = hog(img.rot90().reshape(data_shape), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=False, multichannel=False)
+    #hog_fd.append(fd)
