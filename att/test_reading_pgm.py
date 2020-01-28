@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from sklearn.utils import Bunch
 
+from att.read_pgm_file import read_pgm
+
 ORL_PATH = "D:\\RES\\ORL"
 
 ATT_DESCR = '''
@@ -36,31 +38,7 @@ When using these images, please give credit to AT&T Laboratories Cambridge.
 '''
 
 
-# def readpgm(name):
-#     with open(name) as f:
-#         zero = f.read(1);
-#         print(zero)
-#         # lines = f.readlines()
-#
-#     # This ignores commented lines
-#     return "beast"
-
-
-def readpgm(name):
-    with open(name, 'rb') as f:
-        if (f.readline).contains('P2'):
-            print('p2 found')
-            lines = f.readlines()
-            for line in lines:
-                print(line)
-        else:
-            print('P2 not found')
-            return None
-
-    return None
-
-
-img = readpgm('D:\\RES\\ORL\\s1\\1.pgm')
+shape, max_value, img = read_pgm('D:\\RES\\ORL\\s1\\1.pgm')
 
 
 def read_images(path, sz=None):
@@ -77,7 +55,8 @@ def read_images(path, sz=None):
             for filename in os.listdir(subject_path):
                 print(filename)
                 try:
-                    x.append(np.asarray([0,1,1,2,3]))
+                    shape, max_value, img = read_pgm(subject_path+"\\"+filename)
+                    x.append(img)
                     y.append(c)
                 except IOError:
                     print("I/O error ({0}) : {1} ".format(errno, os.strerror))
