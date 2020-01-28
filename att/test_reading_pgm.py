@@ -38,7 +38,7 @@ When using these images, please give credit to AT&T Laboratories Cambridge.
 '''
 
 
-def read_images(path, sz=None):
+def read_images(path):
     c = 0
     x = []
     y = []
@@ -52,8 +52,8 @@ def read_images(path, sz=None):
             print(subject_path)
             for filename in os.listdir(subject_path):
                 try:
-                    shape, max_value, img = read_pgm(subject_path+"\\"+filename)
-                    x.append(img)
+                    shape, max_value, image = read_pgm(subject_path+"\\"+filename)
+                    x.append(image)
                     y.append(c)
                 except IOError:
                     print("I/O error ({0}) : {1} ".format(errno, os.strerror))
@@ -80,7 +80,7 @@ plt.show()
 
 hog_fd = []
 for img in b.data:
-    print(f'img shape {len(img)}')
-    if (data_size == len(img)):
+    print(f'img shape {type(img)}')
+    if data_size == len(img):
         fd = hog(np.array(img).reshape(data_shape), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=False, multichannel=False)
         hog_fd.append(fd)

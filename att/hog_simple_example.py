@@ -1,5 +1,5 @@
 """
-Test HoG from skimage.feature
+Testing the hog function from skimage.feature
 
 https://scikit-image.org/docs/dev/auto_examples/features_detection/plot_hog.html
 """

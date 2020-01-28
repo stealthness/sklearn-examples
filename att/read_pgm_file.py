@@ -23,12 +23,11 @@ import matplotlib.pyplot as plt
 from sw_path import WORK_ROOT
 
 
-def read_pgm(name):
-    with open(name, 'rb') as f:
+def read_pgm(filename):
+    with open(filename, 'rb') as f:
         d = []
         if f.readline() == b'P5\n':
-            b = f.readline()
-            s = b.decode('utf-8').strip().split(" ")
+            s = f.readline().decode('utf-8').strip().split(" ")
             shape = (int(s[1]), int(s[0].strip()))
             max_value = int(f.readline().strip())
             for byte in f.readline():
@@ -43,4 +42,6 @@ def read_pgm(name):
 sh, mv,  img = read_pgm(WORK_ROOT+'RES\\ATT\\s1\\1.pgm')
 
 plt.imshow(img.reshape(sh), cmap='gray')
+plt.axis('off')
+plt.title('An Example of the ATT image')
 plt.show()
