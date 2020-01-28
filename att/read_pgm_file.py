@@ -20,6 +20,8 @@ bytes. The most significant byte is first.
 import numpy as np
 import matplotlib.pyplot as plt
 
+from sw_path import WORK_ROOT
+
 
 def read_pgm(name):
     with open(name, 'rb') as f:
@@ -38,7 +40,7 @@ def read_pgm(name):
     return shape, max_value, np.array(d)
 
 
-sh, mv,  img = read_pgm('D:\\RES\\ORL\\s1\\1.pgm')
+sh, mv,  img = read_pgm(WORK_ROOT+'RES\\ATT\\s1\\1.pgm')
 
 plt.imshow(img.reshape(sh), cmap='gray')
 plt.show()

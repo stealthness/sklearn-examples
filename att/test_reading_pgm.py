@@ -1,16 +1,15 @@
 import errno
-import sys
 import random
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-from PIL import Image
 from skimage.feature import hog
 from sklearn.utils import Bunch
 
 from att.read_pgm_file import read_pgm
+from sw_path import WORK_ROOT
 
-ORL_PATH = "D:\\RES\\ORL"
+ORL_PATH = WORK_ROOT + "RES\\ATT"
 
 ATT_DESCR = '''
 Our Database of Faces, (formerly 'The ORL Database of Faces'), contains a set of face images taken between April 1992 
@@ -72,15 +71,16 @@ data_shape = b.shape
 data_size = b.data.size
 print(f'The shape of the data is {data_shape}, that is there are {data_size} number of images')
 
-img = b.data[random.randint(0, 400-1)]
-plt.imshow(img.reshape((92, 112)), cmap='gray')
+img = np.array(b.data[random.randint(0, 400-1)]).reshape(data_shape)
+plt.imshow(img, cmap='gray')
 plt.show()
-fd, hog_img = hog(img.reshape((92, 112)), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=False)
-plt.imshow(hog_img.rot90())
+fd, hog_img = hog(img, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=False)
+plt.imshow(hog_img)
 plt.show()
 
 hog_fd = []
 for img in b.data:
     print(f'img shape {len(img)}')
-    #fd = hog(img.rot90().reshape(data_shape), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=False, multichannel=False)
-    #hog_fd.append(fd)
+    if (data_size == len(img)):
+        fd = hog(np.array(img).reshape(data_shape), orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=False, multichannel=False)
+        hog_fd.append(fd)

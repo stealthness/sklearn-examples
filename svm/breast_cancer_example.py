@@ -13,26 +13,26 @@ from sklearn import datasets, metrics, svm
 from sklearn.model_selection import train_test_split
 
 # load the data set for breast cancer
-b = datasets.load_breast_cancer()
+cancer = datasets.load_breast_cancer()
 
 # print the names of the features
-print(f'The total number of Features : {len(b.feature_names)}')
-print(f'Features names :\n {b.feature_names}\n')
+print(f'The total number of Features : {len(cancer.feature_names)}')
+print(f'Features names :\n {cancer.feature_names}\n')
 
 # print the label types of cancer
-print(f'Labels names : \n{b.target_names}\n')
+print(f'Labels names : \n{cancer.target_names}\n')
 
 # print the shape of the data
-print(f'The shape of the data is {b.data.shape}')
-number_of_examples = b.data.shape[0]
+print(f'The shape of the data is {cancer.data.shape}')
+number_of_examples = cancer.data.shape[0]
 
 # Count the number of cancer of benign
-print(f'The number of example that are {b.target_names[0]} are {sum(b.target)}')
-print(f'The number of example that are {b.target_names[1]} are {number_of_examples - sum(b.target)}')
+print(f'The number of example that are {cancer.target_names[0]} are {sum(cancer.target)}')
+print(f'The number of example that are {cancer.target_names[1]} are {number_of_examples - sum(cancer.target)}')
 
 
 # split the data set into training (70%) and test set(30%)
-X_train, X_test, y_train, y_test = train_test_split(b.data, b.target, test_size=0.3, random_state=109)
+X_train, X_test, y_train, y_test = train_test_split(cancer.data, cancer.target, test_size=0.3, random_state=109)
 
 # Import svm from sklearn
 

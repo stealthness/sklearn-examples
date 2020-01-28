@@ -96,13 +96,10 @@ titles = ('SVC with linear kernel',
           'SVC with polynomial (degree 3) kernel')
 
 
-
 models = (clf.fit(X_petals, y) for clf in models_petals)
 axis = ('petal_length', 'petal_width')
 
 create_plot(models, titles, axis, X_petals)
-
-
 
 models = (clf.fit(X_sepals, y) for clf in models_sepals)
 axis = ('sepals_length', 'sepals_width')
