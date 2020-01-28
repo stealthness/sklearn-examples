@@ -1,6 +1,8 @@
-'''
+"""
 This file is test reading ATT facedataset from a text file
-'''
+
+THIS CODE IS REDUNDANT NOW (28/01/20)
+"""
 import csv
 import numpy as np
 
@@ -14,8 +16,7 @@ for line in f:
     if i > 10:
         break
     else:
-        print(str(i) + " ------- " + line)
-
+        print(str(i) + " -- " + line)
     i =i + 1
 
 reader = csv.reader(open('I:/RES/ATT/D.txt', "r"), delimiter=",")

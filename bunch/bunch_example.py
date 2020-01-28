@@ -1,36 +1,33 @@
-'''
-Purpose of this file is to explore the bunch class from sklearn
-'''
+"""
+Purpose of this file is to explore the bunch class from sklearn, a dictionary-like object that exposes its keys as
+attributes. Documentation can be found at https://kite.com/python/docs/sklearn.utils.Bunch
+"""
+from sklearn import datasets, svm
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.utils import Bunch
 from time import time
 
-import numpy as np
-from sklearn import datasets
-from sklearn import svm
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
 # from sklearn a typical bunch object is created
-from sklearn.utils import Bunch
-
-b = datasets.load_iris()
+iris = datasets.load_iris()
 
 # Description of the IRIS dataset
-DESCR = b.DESCR
-print(f'This bunch has DESCR attribute, which contains;\n{b.DESCR}\n ')
+DESCR = iris.DESCR
+print(f'The iris variable is a bunch object. It has DESCR attribute, which contains;\n{iris.DESCR}\n ')
 
 # Features names
-feature_names = b.feature_names
+feature_names = iris.feature_names
 number_of_features = len(feature_names)
 print(f'There are {number_of_features}, these are;\n{feature_names}\n')
 
 # target names, different classification possible
-print(f'The Iris dataset main data is stored in b.data, is has the shape {b.data.shape}\n')
-data_size = 4
+print(f'The Iris dataset main data is stored in iris.data, is has the shape {iris.data.shape}\n')
+data_size = iris.data.shape[0]
 print(f'That the size of the dataset is {data_size} each with {number_of_features} features\n')
-d = b.data
+d = iris.data
 
-labels_names = b.target_names
-labels = b.target
+labels_names = iris.target_names
+labels = iris.target
 print(f'There are {len(labels_names)} labels, these are;\n {labels_names}\n')
 print(f'There is a corresponding {len(labels)} label for each example in the dataset')
 
@@ -47,18 +44,18 @@ def get_result(bunch):
     return (accuracy_score(y_test, y_pred), time_finished - time_started)
 
 
-print(f'our accuracy b is {get_result(b)}\n')
+print(f'our accuracy b is {get_result(iris)[0]}\n')
 
 # There is better way to create a bunch object (see new_cancer)
-new_b = Bunch()
-new_b.DESCR = DESCR
-new_b.data = d
-new_b.target = labels
-new_b.target_names = labels_names
-new_b.featur_names = feature_names
+new_iris = Bunch()
+new_iris.DESCR = DESCR
+new_iris.data = d
+new_iris.target = labels
+new_iris.target_names = labels_names
+new_iris.featur_names = feature_names
 
-result, time_taken = get_result(new_b)
-print(f'Our accuracy for new_b is {result}\nCompleted in {1000*time_taken:.3f}\n')
+result, time_taken = get_result(new_iris)
+print(f'Our accuracy for new_iris is {result}\nCompleted in {1000*time_taken:.3f}\n')
 
 cancer = datasets.load_breast_cancer()
 result, time_taken = get_result(cancer)
