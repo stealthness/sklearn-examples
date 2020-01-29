@@ -2,6 +2,7 @@
 Test case for boolean masks
 """
 import unittest
+import numpy as np
 
 from boolmask_experiment import boolean_mask
 
@@ -35,3 +36,13 @@ class TestBooleanMasks(unittest.TestCase):
         mask = boolean_mask.get_mask(MASK_SIZE, type='random')
         print(mask)
         self.assertTrue(True)
+
+    def test_operator_and__on_boolean_mask(self):
+        empty_mask = boolean_mask.get_mask(MASK_SIZE, type='empty')
+        full_mask = boolean_mask.get_mask(MASK_SIZE, type='full')
+        np.testing.assert_almost_equal(empty_mask, np.logical_and(empty_mask, full_mask))
+
+    def test_operator_or__on_boolean_mask(self):
+        empty_mask = boolean_mask.get_mask(MASK_SIZE, type='empty')
+        full_mask = boolean_mask.get_mask(MASK_SIZE, type='full')
+        np.testing.assert_almost_equal(full_mask, np.logical_or(empty_mask, full_mask))
