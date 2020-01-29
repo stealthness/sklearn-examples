@@ -14,13 +14,24 @@ class TestBooleanMasks(unittest.TestCase):
         self.assertTrue(True)
 
     def test_boolean_mask_is_all_false(self):
-        mask = boolean_mask.get_empty_mask(MASK_SIZE)
+        mask = boolean_mask.get_mask(MASK_SIZE, type='empty')
         self.assertEqual(len(mask), MASK_SIZE)
         for item in mask:
             self.assertFalse(item)
 
-    def test_boolean_mask_is_all_talse(self):
-        mask = boolean_mask.get_full_mask(MASK_SIZE)
+    def test_boolean_mask_is_all_true(self):
+        mask = boolean_mask.get_mask(MASK_SIZE, type='full')
         self.assertEqual(len(mask), MASK_SIZE)
         for item in mask:
             self.assertTrue(item)
+
+    def test_boolean_mask_is_all_true(self):
+        mask = boolean_mask.get_mask(MASK_SIZE, type='full')
+        self.assertEqual(len(mask), MASK_SIZE)
+        for item in mask:
+            self.assertTrue(item)
+
+    def test_boolean_mask_random(self):
+        mask = boolean_mask.get_mask(MASK_SIZE, type='random')
+        print(mask)
+        self.assertTrue(True)
