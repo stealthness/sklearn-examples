@@ -7,6 +7,7 @@ LOGGING = True
 
 
 def get_mask(size: int, **kwargs) -> np.array:
+    """Returns a boolean mask which is a boolean np.array"""
     if 'type' in kwargs:
         if kwargs['type'] == 'full':
             return np.array([True] * size)
@@ -40,7 +41,17 @@ def mask_to_string(mask: np.array):
     return sb
 
 
+def bool_not(arg_0):
+    """Returns the logical NOT operator on a boolean numpy arrays"""
+    if LOGGING:
+        print(f'Logging : bool_and')
+        print(f'arg_0 is {type(arg_0)} val is {arg_0}')
+        print(f'return type is {type(np.logical_and(arg_0))}')
+    return np.logical_not(arg_0)
+
+
 def bool_and(arg_0, arg_1):
+    """Returns the logical AND operator on two boolean numpy arrays"""
     if LOGGING:
         print(f'Logging : bool_and')
         print(f'arg_0 is {type(arg_0)} val is {arg_0} \n arg_1 is {type(arg_1)} val is {arg_1}')
@@ -49,8 +60,18 @@ def bool_and(arg_0, arg_1):
 
 
 def bool_or(arg_0, arg_1):
+    """Returns the logical OR operator on two boolean numpy arrays"""
     if LOGGING:
         print(f'Logging : bool_or')
         print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
         print(f'return type is {type(np.logical_or(arg_0, arg_1))}')
     return np.logical_or(arg_0, arg_1)
+
+
+def bool_xor(arg_0, arg_1):
+    """Returns the logical XOR operator on two boolean numpy arrays"""
+    if LOGGING:
+        print(f'Logging : bool_xor')
+        print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
+        print(f'return type is {type(np.logical_xor(arg_0, arg_1))}')
+    return np.logical_xor(arg_0, arg_1)
