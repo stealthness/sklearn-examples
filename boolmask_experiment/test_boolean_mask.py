@@ -46,3 +46,10 @@ class TestBooleanMasks(unittest.TestCase):
         empty_mask = boolean_mask.get_mask(MASK_SIZE, type='empty')
         full_mask = boolean_mask.get_mask(MASK_SIZE, type='full')
         np.testing.assert_almost_equal(full_mask, np.logical_or(empty_mask, full_mask))
+
+    def test_boolean_mask_for_half(self):
+        exp_mask = np.array([True, True, False, False])
+        act_mask_0 = boolean_mask.get_mask(4, type='half_0')
+        act_mask_1 = boolean_mask.get_mask(4, type='half_1')
+        self.assertFalse(np.logical_xor(act_mask_0, exp_mask).all())
+        self.assertFalse(np.logical_xor(act_mask_1, np.logical_not(exp_mask)).all())
