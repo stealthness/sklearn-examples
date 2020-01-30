@@ -28,12 +28,6 @@ class TestBooleanMasks(unittest.TestCase):
         for item in mask:
             self.assertTrue(item)
 
-    def test_boolean_mask_is_all_true(self):
-        mask = get_mask(MASK_SIZE, type='full')
-        self.assertEqual(len(mask), MASK_SIZE)
-        for item in mask:
-            self.assertTrue(item)
-
     def test_boolean_mask_random(self):
         mask = get_mask(MASK_SIZE, type='random')
         print(mask)
