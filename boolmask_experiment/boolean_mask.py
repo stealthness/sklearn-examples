@@ -19,8 +19,6 @@ def get_mask(size: int, **kwargs) -> np.array:
         if kwargs['type'] == 'random':
             # return get_full_mask(size)
             return np.random.rand(1, size) > 0.5
-    if 'str' in kwargs:
-        return get_mask_from_string(kwargs['str'])
     # default, includes 'empty'
     return np.array([False] * size)
 
