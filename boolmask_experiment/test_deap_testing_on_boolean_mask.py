@@ -1,13 +1,25 @@
 from unittest import TestCase
 import numpy as np
 
-from boolmask_experiment.deap_example_using_boolean_mask import *
+from boolmask_experiment.boolean_mask import get_mask, bool_and, bool_or
 
-empty_mask = np.array([False, False, False, False])
-full_mask = np.logical_not(empty_mask)
-half_0_mask = np.array([True, True, False, False])
-half_1_mask = np.logical_not(np.array([True, True, False, False]))
 
+empty_mask = get_mask(str="0000")
+full_mask = get_mask(str="1111")
+half_0_mask = get_mask(str="1100")
+half_1_mask = get_mask(str="0011")
+
+b1000 = get_mask(str="0011")
+b0100 = get_mask(str="0011")
+b0010 = get_mask(str="0011")
+b0001 = get_mask(str="0011")
+
+b0110 = get_mask(str="0110")
+b0101 = get_mask(str="0011")
+b1010 = get_mask(str="0011")
+
+b1101 = get_mask(str="1101")
+b1011 = get_mask(str="1011")
 
 class Test(TestCase):
 

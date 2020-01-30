@@ -3,8 +3,10 @@ The purpos of the file is create a bunch of boolean mask that I will then use fo
 """
 import numpy as np
 
+LOGGING = True
 
-def get_mask(size, **kwargs):
+
+def get_mask(size: int, **kwargs) -> np.array:
     if 'type' in kwargs:
         if kwargs['type'] == 'full':
             return np.array([True] * size)
@@ -17,6 +19,8 @@ def get_mask(size, **kwargs):
         if kwargs['type'] == 'random':
             # return get_full_mask(size)
             return np.random.rand(1, size) > 0.5
+    if 'str' in kwargs:
+        return get_mask_from_string(kwargs['str'])
     # default, includes 'empty'
     return np.array([False] * size)
 
@@ -36,3 +40,19 @@ def mask_to_string(mask: np.array):
     for b in mask:
         sb += "1" if b else "0"
     return sb
+
+
+def bool_and(arg_0, arg_1):
+    if LOGGING:
+        print(f'Logging : bool_and')
+        print(f'arg_0 is {type(arg_0)} val is {arg_0} \n arg_1 is {type(arg_1)} val is {arg_1}')
+        print(f'return type is {type(np.logical_and(arg_0, arg_1))}')
+    return np.logical_and(arg_0, arg_1)
+
+
+def bool_or(arg_0, arg_1):
+    if LOGGING:
+        print(f'Logging : bool_or')
+        print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
+        print(f'return type is {type(np.logical_or(arg_0, arg_1))}')
+    return np.logical_or(arg_0, arg_1)

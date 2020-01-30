@@ -23,20 +23,7 @@ class Bob:
 d = datasets.load_digits()
 
 
-def bool_and(arg_0, arg_1):
-    if LOGGING:
-        print(f'Logging : bool_and')
-        print(f'arg_0 is {type(arg_0)} val is {arg_0} \n arg_1 is {type(arg_1)} val is {arg_1}')
-        print(f'return type is {type(np.logical_and(arg_0, arg_1))}')
-    return np.logical_and(arg_0, arg_1)
 
-
-def bool_or(arg_0, arg_1):
-    if LOGGING:
-        print(f'Logging : bool_or')
-        print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
-        print(f'return type is {type(np.logical_or(arg_0, arg_1))}')
-    return np.logical_or(arg_0, arg_1)
 
 
 pset = gp.PrimitiveSet('main', 1)
