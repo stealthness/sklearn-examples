@@ -1,7 +1,7 @@
 from unittest import TestCase
 import numpy as np
 
-from boolmask_experiment.deap_testing_on_boolean_mask import *
+from boolmask_experiment.deap_example_using_boolean_mask import *
 
 empty_mask = np.array([False, False, False, False])
 full_mask = np.logical_not(empty_mask)
