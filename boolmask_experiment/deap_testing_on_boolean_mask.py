@@ -19,7 +19,6 @@ class Bob:
         return self.b
 
 
-
 d = datasets.load_digits()
 
 
