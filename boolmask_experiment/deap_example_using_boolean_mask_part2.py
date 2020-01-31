@@ -6,7 +6,7 @@ from random import random
 
 from deap.gp import genFull, PrimitiveTree
 import numpy as np
-from sklearn import datasets
+from sklearn import datasets, svm, metrics
 from deap import base, creator, gp, tools, algorithms
 from sklearn.model_selection import train_test_split
 
@@ -21,6 +21,15 @@ def get_mod_x(data, mask):
     for d in data:
         mod_x.append(d[mask])
     return mod_x
+
+def do_training_and_predicting(data, labels):
+    # split the data set into training (80%) and test set(20%)
+    x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=109)
+    clf = svm.SVC(gamma='auto')
+    clf.fit(x_train, y_train)
+    y_pred = clf.predict(x_test)
+    # Import sklearn.metrics to model accuracy
+    return metrics.accuracy_score(y_test, y_pred)
 
 
 d = datasets.load_digits()
@@ -54,8 +63,14 @@ toolbox.register("compile", gp.compile, pset=pset)
 def eval(individual):
     # Transform the tree expression in a callable function
     func = toolbox.compile(expr=individual)
-    print(f'eval {func}')
-    return 0.5,
+    result = 1
+    if func.sum() > 5:
+        mod_x = get_mod_x(d.data, func)
+        result = do_training_and_predicting(mod_x, d.target)
+    else:
+        print(f'fail')
+    print(result)
+    return result,
 
 toolbox.register("evaluate", eval)
 toolbox.register("select", tools.selAutomaticEpsilonLexicase)
@@ -63,7 +78,7 @@ toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genFull, min_=0, max_=2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
 
-pop = toolbox.population(n=10)
+pop = toolbox.population(n=100)
 hof = tools.HallOfFame(1)
 
 
@@ -77,6 +92,5 @@ print(f't is {t}')
 print(f'd.data[0] is {d.data[0]}')
 print(f'mod_x = {d.data[0][funct]}')
 mod_x = get_mod_x(d.data, funct)
-#mod_x_train = get_mod_x(x_train, gp.genFull(pset, min_=0, max_=2))
 
 pop = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 40, halloffame=hof, verbose=True)
