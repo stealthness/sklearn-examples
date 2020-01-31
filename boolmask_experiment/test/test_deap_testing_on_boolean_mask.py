@@ -37,5 +37,17 @@ class Test(TestCase):
     def test_case_1_not_with_array_size_1(self):
         self.run_test_case('test-case:1not', TEST_CASE_FILE, bool_not)
 
-    def testcase_2_not_with_array_size_1(self):
+    def test_case_2_not_with_array_size_1(self):
         self.run_test_case('testcase:2not', TEST_CASE_FILE, bool_not)
+
+    def test_case_2_and_with_array_size_2(self):
+        self.run_test_case('testcase:2and', TEST_CASE_FILE, bool_and)
+
+    def test_case_2_or_with_array_size_2(self):
+        self.run_test_case('testcase:2or', TEST_CASE_FILE, bool_or)
+
+    def test_case_2_xor_with_array_size_2(self):
+        self.run_test_case('testcase:2xor', TEST_CASE_FILE, bool_xor)
+
+    def test_case_3_and_with_array_size_3(self):
+        self.run_test_case('testcase:3and', TEST_CASE_FILE, bool_and)

@@ -9,6 +9,8 @@ import numpy as np
 from sklearn import datasets
 from deap import base, creator, gp, tools
 
+from boolmask_experiment.boolean_mask import bool_and, bool_or, bool_not, bool_xor
+
 LOGGING = True
 
 class Bob:
@@ -23,18 +25,17 @@ class Bob:
 d = datasets.load_digits()
 
 
-
-
-
 pset = gp.PrimitiveSet('main', 1)
 pset.addPrimitive(bool_and, 2)
 pset.addPrimitive(bool_or, 2)
+pset.addPrimitive(bool_xor, 2)
+pset.addPrimitive(bool_not, 1)
 
 pset.addTerminal(np.array([True, True, True, True]), name='full')
 pset.addTerminal(np.array([False, False, False, False]), name='empty')
-# pset.addTerminal(np.array([False, False, True, True]), np.array)
-# pset.addTerminal(np.array([True, True, False, False]), np.array)
-pset.addEphemeralConstant("t", lambda: np.random.rand(1, 4) > 0.5)
+pset.addTerminal(np.array([False, False, True, True]), name='b0011')
+pset.addTerminal(np.array([True, True, False, False]), name='b1100')
+# pset.addEphemeralConstant("random", lambda: np.random.rand(1, 4) > 0.5)
 
 creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
 creator.create("Individual", gp.PrimitiveTree, fitness=creator.FitnessMin, pset=pset)

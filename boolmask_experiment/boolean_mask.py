@@ -3,7 +3,7 @@ The purpos of the file is create a bunch of boolean mask that I will then use fo
 """
 import numpy as np
 
-LOGGING = True
+LOGGING = False
 
 
 def get_mask(size: int, **kwargs) -> np.array:

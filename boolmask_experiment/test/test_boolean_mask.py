@@ -6,42 +6,34 @@ import random
 
 import numpy as np
 
-from boolmask_experiment.boolean_mask import mask_to_string, get_mask_from_string, get_mask
+from boolmask_experiment.boolean_mask import mask_to_string, get_mask_from_string, get_mask, bool_and, bool_or, \
+    bool_xor, bool_not
 
 MASK_SIZE = 16
 
 
 class TestBooleanMasks(unittest.TestCase):
 
-    def test_true(self):
-        self.assertTrue(True)
-
     def test_boolean_mask_is_all_false(self):
-        mask = get_mask(MASK_SIZE, type='empty')
-        self.assertEqual(len(mask), MASK_SIZE)
-        for item in mask:
-            self.assertFalse(item)
+        self.assertFalse(get_mask(MASK_SIZE, type='empty').any())
 
     def test_boolean_mask_is_all_true(self):
-        mask = get_mask(MASK_SIZE, type='full')
-        self.assertEqual(len(mask), MASK_SIZE)
-        for item in mask:
-            self.assertTrue(item)
+        self.assertTrue(get_mask(MASK_SIZE, type='full').all())
 
     def test_boolean_mask_random(self):
         mask = get_mask(MASK_SIZE, type='random')
-        print(mask)
+        print(f'A random mask is {mask}\n')
         self.assertTrue(True)
 
     def test_operator_and__on_boolean_mask(self):
         empty_mask = get_mask(MASK_SIZE, type='empty')
         full_mask = get_mask(MASK_SIZE, type='full')
-        np.testing.assert_almost_equal(empty_mask, np.logical_and(empty_mask, full_mask))
+        np.testing.assert_array_equal(empty_mask, np.logical_and(empty_mask, full_mask))
 
     def test_operator_or__on_boolean_mask(self):
         empty_mask = get_mask(MASK_SIZE, type='empty')
         full_mask = get_mask(MASK_SIZE, type='full')
-        np.testing.assert_almost_equal(full_mask, np.logical_or(empty_mask, full_mask))
+        np.testing.assert_array_equal(full_mask, np.logical_or(empty_mask, full_mask))
 
     def test_boolean_mask_for_half(self):
         exp_mask = np.array([True, True, False, False])
@@ -50,21 +42,27 @@ class TestBooleanMasks(unittest.TestCase):
         self.assertFalse(np.logical_xor(act_mask_0, exp_mask).all())
         self.assertFalse(np.logical_xor(act_mask_1, np.logical_not(exp_mask)).all())
 
-    # def test_boolean_operator_and_mask_repeatively(self):
-    #     mask_set = self.get_set()
-    #     print(mask_set)
-    #     # empty_mask = boolean_mask.get_mask(MASK_SIZE, type='empty')
-    #     # full_mask = boolean_mask.get_mask(MASK_SIZE, type='full')
-    #     # act_mask_0 = boolean_mask.get_mask(4, type='half_0')
-    #     # act_mask_1 = boolean_mask.get_mask(4, type='half_1')
-    #     b = bool_and(random.choice(mask_set), random.choice(mask_set))
-    #     print(b)
-    #     for i in range(10):
-    #         b = bool_and(b, random.choice(mask_set))
-    #         print(f'{i} -- {b}')
-    #
-    #     print(b)
-    #     self.fail()
+    def test_boolean_operator_and_mask_repetitively (self):
+        mask_set = self.get_set()
+        b = bool_and(get_mask(MASK_SIZE, type='random'), get_mask(MASK_SIZE, type='random'))
+        for i in range(100):
+            b = bool_and(b, get_mask(MASK_SIZE, type='random'))
+        print(f'After multiple operation we have {b}')
+        self.assertTrue(True)
+
+    def test_random_boolean_operator_and_mask_repetitively (self):
+        function_set = self.get_functions()
+        function = random.choice(function_set)
+        b = function(random.choice(get_mask(MASK_SIZE, type='random')), get_mask(MASK_SIZE, type='random'))
+        for i in range(100):
+            print(b)
+            function = random.choice(function_set)
+            if function == bool_not:
+                b = function(b)
+            else:
+                b = function(b, get_mask(MASK_SIZE, type='random'))
+        print(f'After multiple operation we have {b}')
+        self.assertTrue(True)
 
 
     @staticmethod
@@ -74,6 +72,10 @@ class TestBooleanMasks(unittest.TestCase):
         act_mask_0 = get_mask(MASK_SIZE, type='half_0')
         act_mask_1 = get_mask(MASK_SIZE, type='half_1')
         return [empty_mask, full_mask, act_mask_0, act_mask_1]
+
+    @staticmethod
+    def get_functions():
+        return [bool_and, bool_or, bool_xor, bool_not]
 
     def test_get_mask_from_string_using_1111(self):
         full_mask = get_mask(4, type='full')
