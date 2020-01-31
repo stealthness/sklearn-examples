@@ -32,13 +32,25 @@ class Test(TestCase):
         np.testing.assert_array_equal(np.array([False, False, True, True]), b0011)
 
     # testing and
+    @staticmethod
+    def run_testcase(test_case, filename, function):
+        with open(filename) as file:
+            for line in file:
+                if line.startswith(test_case):
+                    parts = line.split(',')
+                    for i in range(int(parts[1])):
+                        bits = file.readline().strip().split(',')
+                        exp = get_mask_from_string(bits[0])
+                        act = function(get_mask_from_string(bits[1]), get_mask_from_string(bits[2]))
+                        np.testing.assert_array_equal(exp, act, f'testcase is {test_case} no {i}')
 
-
+    def testcase_11_and_with_array_size_1(self):
+        self.run_testcase('testcase:1and', 'test_cases_bool_operator.txt', bool_and)
 
     def testcase_1_and_with_array_size_1(self):
         with open('test_cases_bool_operator.txt') as f:
             for line in f:
-                if line.startswith('testcase:1'):
+                if line.startswith('testcase:1and'):
                     parts = line.split(',')
                     for i in range(int(parts[1])):
                         line = f.readline()
