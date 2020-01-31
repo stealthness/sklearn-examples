@@ -44,9 +44,9 @@ def mask_to_string(mask: np.array):
 def bool_not(arg_0):
     """Returns the logical NOT operator on a boolean numpy arrays"""
     if LOGGING:
-        print(f'Logging : bool_and')
+        print(f'Logging : bool_not')
         print(f'arg_0 is {type(arg_0)} val is {arg_0}')
-        print(f'return type is {type(np.logical_and(arg_0))}')
+        print(f'return type is {type(np.logical_not(arg_0))}')
     return np.logical_not(arg_0)
 
 
