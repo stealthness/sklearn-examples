@@ -3,6 +3,8 @@ import numpy as np
 
 from boolmask_experiment.boolean_mask import get_mask, bool_and, bool_or, get_mask_from_string
 
+TEST_CASE_FILE = 'test_cases_bool_operator.txt'
+
 b0000 = get_mask_from_string("0000")
 b1111 = get_mask_from_string("1111")
 b1100 = get_mask_from_string("1100")
@@ -44,37 +46,13 @@ class Test(TestCase):
                         act = function(get_mask_from_string(bits[1]), get_mask_from_string(bits[2]))
                         np.testing.assert_array_equal(exp, act, f'testcase is {test_case} no {i}')
 
-    def testcase_11_and_with_array_size_1(self):
-        self.run_testcase('testcase:1and', 'test_cases_bool_operator.txt', bool_and)
-
     def testcase_1_and_with_array_size_1(self):
-        with open('test_cases_bool_operator.txt') as f:
-            for line in f:
-                if line.startswith('testcase:1and'):
-                    parts = line.split(',')
-                    for i in range(int(parts[1])):
-                        line = f.readline()
-                        bits = line.strip().split(',')
-                        print(f'bits is {bits}')
-                        exp = get_mask_from_string(bits[0])
-                        act = bool_and(get_mask_from_string(bits[1]), get_mask_from_string(bits[2]))
-                        np.testing.assert_array_equal(exp, act)
-                    break
+        self.run_testcase('testcase:1and', TEST_CASE_FILE, bool_and)
+
+    def testcase_21_or_with_array_size_1(self):
+        self.run_testcase('testcase:1or', TEST_CASE_FILE, bool_or)
 
 
-    def testcase_2_or_with_array_size_1(self):
-        with open('test_cases_bool_operator.txt') as f:
-            for line in f:
-                if line.startswith('testcase:2'):
-                    parts = line.split(',')
-                    for i in range(int(parts[1])):
-                        line = f.readline()
-                        bits = line.strip().split(',')
-                        print(f'bits is {bits}')
-                        exp = get_mask_from_string(bits[0])
-                        act = bool_or(get_mask_from_string(bits[1]), get_mask_from_string(bits[2]))
-                        np.testing.assert_array_equal(exp, act)
-                    break
 
     def test_bool_and_with_half(self):
         np.testing.assert_array_equal(b0000, bool_and(b0000, b0001))

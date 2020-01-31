@@ -6,8 +6,8 @@ testcase:1and,4
 0,0,0
 testcase:1or,4
 1,1,1
-0,1,0
-0,0,1
+1,1,0
+1,0,1
 0,0,0
 testcase:1xor,4
 0,1,1
