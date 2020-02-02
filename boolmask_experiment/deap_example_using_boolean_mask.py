@@ -35,13 +35,13 @@ pset.addTerminal(np.array([True, True, True, True]), name='full')
 pset.addTerminal(np.array([False, False, False, False]), name='empty')
 pset.addTerminal(np.array([False, False, True, True]), name='b0011')
 pset.addTerminal(np.array([True, True, False, False]), name='b1100')
-# pset.addEphemeralConstant("random", lambda: np.random.rand(1, 4) > 0.5)
+pset.addEphemeralConstant("random101", lambda: (np.random.rand(1, 4) > 0.5))
 
 creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
 creator.create("Individual", gp.PrimitiveTree, fitness=creator.FitnessMin, pset=pset)
 
 toolbox = base.Toolbox()
-toolbox.register("expr", gp.genFull, pset=pset, min_=1, max_=3)
+toolbox.register("expr", gp.genFull, pset=pset, min_=2, max_=2)
 toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.expr)
 
 expr = genFull(pset, min_=1, max_=3)
@@ -49,6 +49,6 @@ tree = PrimitiveTree(expr)
 print(tree)
 
 func = gp.compile(tree, pset)
-ans = func(np.array([False, True, False, False]))
+ans = func(np.array([True, True, True, True]))
 
 

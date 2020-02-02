@@ -42,12 +42,12 @@ pset.addPrimitive(bool_or, 2)
 pset.addPrimitive(bool_xor, 2)
 pset.addPrimitive(bool_not, 1)
 
-# We add some terminals that are boolean numpy arrays of 64 (8x8)
+# # We add some terminals that are boolean numpy arrays of 64 (8x8)
 pset.addTerminal(np.array([True, True, True, False]*16), name='b1110x16')
 pset.addTerminal(np.array([False, True, False, False]*16), name='b0100x16')
 pset.addTerminal(np.array([False, False, True, True]*16), name='b0011x16')
 pset.addTerminal(np.array([True, True, False, False]*16), name='b1100x16')
-# pset.addEphemeralConstant("random", lambda: np.random.rand(1, 4) > 0.5)
+pset.addEphemeralConstant("random64", lambda: np.random.rand(1, 64) > 0.5)
 
 
 creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
@@ -93,4 +93,4 @@ print(f'd.data[0] is {d.data[0]}')
 print(f'mod_x = {d.data[0][funct]}')
 mod_x = get_mod_x(d.data, funct)
 
-pop = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 40, halloffame=hof, verbose=True)
+pop, log = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 40, halloffame=hof, verbose=True)
