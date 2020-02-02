@@ -108,3 +108,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# work drive path
+sw_path.py
