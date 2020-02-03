@@ -1,6 +1,6 @@
 import os
+
 from PIL import Image
-from .sw_utils flatten_image, unflatten_image
 
 
 class SWData:
@@ -49,7 +49,7 @@ class SWData:
         self.base_path = ""
         self.data_classes = []
 
-    def getClass(self,class_name):
+    def getClass(self, class_name):
         returned_data = []
         for img in self.data_img:
             if self.data_classes(img) == class_name:

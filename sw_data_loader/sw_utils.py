@@ -4,9 +4,10 @@ useful functions
 import csv
 
 import numpy as np
+import sw_path.WORK_ROOT as ROOT
 
 
-def import_dataset(file='I:/RES/ATT/D.txt'):
+def import_dataset(file=ROOT + 'RES\\ATT\\D.txt'):
     reader = csv.reader(open(file, "r"), delimiter=",")
     x = list(reader)
     return np.array(x).astype("int")
