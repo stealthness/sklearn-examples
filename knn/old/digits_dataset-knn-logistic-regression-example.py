@@ -1,7 +1,5 @@
 from sklearn import datasets, neighbors, linear_model
-import random
 from matplotlib import pyplot as plt
-import numpy as np
 print(__doc__)
 '''
 The iris dataset svm example is derived from;
@@ -9,6 +7,8 @@ https://scikit-learn.org/stable/auto_examples/exercises/plot_digits_classificati
 2007-2019, scikit-learn developers (BSD License)
 
 The digit data set contains 1797 examples of handwritten digits, each are 8x8 in float ranging in values from 0 to 16
+
+(Original File, see knn/digits_dataset-knn-logistic-regression-example_improved.py for improved version)
 '''
 # load the dataset
 X_digits, y_digits = datasets.load_digits(return_X_y=True)
