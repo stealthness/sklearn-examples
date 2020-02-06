@@ -38,7 +38,7 @@ print(f'If create array of the average value of each image we see that min/max v
       f'therefore the images are not balance')
 
 # split the intop training and testing sets
-x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, test_size=0.3, random_state=42)
 
 histogram_y_train = np.histogram(y_train,np.unique(faces.target))
 histogram_y_test = np.histogram(y_test,np.unique(faces.target))
