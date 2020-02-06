@@ -43,7 +43,7 @@ fig, sub = plt.subplots(1, 2)
 
 sub[0].set_title("Histogram of Mis identification")
 sub[0].bar(d.target_names, misidentified)
-# sub[0].axis([-1, 10, 0, 3], sharey=True)
+sub[0].axis([-1, 10, 0, 3], sharey=True)
 
 sub[1].set_title("Example of a Number")
 
