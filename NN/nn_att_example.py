@@ -37,12 +37,12 @@ print(f'If create array of the average value of each image we see that min/max v
       f'{array_of_image_aveges.min():.4f}, {array_of_image_aveges.max():.4f} respectivly, '
       f'therefore the images are not balance')
 
-# split the intop training and testing sets
-x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, test_size=0.3, random_state=42)
+# split the intop training and testing sets, to make sure that we have equal amount in each classifiction we use
+# option "stratify=faces.target"
+x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, stratify=faces.target, test_size=0.2, random_state=42)
 
-histogram_y_train = np.histogram(y_train,np.unique(faces.target))
-histogram_y_test = np.histogram(y_test,np.unique(faces.target))
-print(f'the histogram of y_train is {histogram_y_train}')
+# show that we have 2 examples of class in the test data split
+histogram_y_test = np.histogram(y_test, np.unique(faces.target))
 print(f'the histogram of y_test is {histogram_y_test}')
 
 # Create the classifiers
