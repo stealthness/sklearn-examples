@@ -3,6 +3,7 @@ The purpose of this file is to show code to retrieve images
 
 """
 import numpy as np
+import skimage.color
 from matplotlib import image
 import matplotlib.pyplot as plt
 from sw_path import WORK_ROOT
@@ -10,6 +11,15 @@ from sw_path import WORK_ROOT
 
 def get_file_name(file):
     return (file.split('//')[-1]).split('.')[0]
+
+def display_plot(plt_img, plt_name, **kwargs):
+    if 'cmap' in kwargs:
+        plt.imshow(plt_img, cmap=kwargs['cmap'])
+    else:
+        plt.imshow(plt_img)
+    plt.title(plt_name)
+    plt.axis("off")
+    plt.show()
 
 
 def display_img(file_input):
@@ -19,13 +29,16 @@ def display_img(file_input):
     print(f'the image {name} is of type {img.dtype}')
     print(f'the image {name} has the min/max values {np.min(img):.4f}/{np.max(img):.4f}')
     print(f'The image {name} has the shape {img.shape}')
-    plt.imshow(img)
-    plt.title(name)
-    plt.axis("off")
-    plt.show()
+    display_plot(img,name)
+
 
 # Load an image from this folder
 display_img('lenna.png')
 
 # lets load an image from a different
 display_img(WORK_ROOT+'RES\TestFolder\Cars\car1.jpg')
+
+# converting to greyscale
+c_img = image.imread('lenna.png')
+bw_img = skimage.color.rgb2gray(c_img);
+display_plot(bw_img,'bw car', cmap='gray')
