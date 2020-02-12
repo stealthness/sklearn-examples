@@ -2,6 +2,9 @@ import os
 
 from PIL import Image
 
+file_deliminator = "//"
+
+valid_image_file_formats = {'png','jpg'}
 
 class SWData:
     data_img = {}
@@ -20,16 +23,18 @@ class SWData:
         self.base_path = folder_location
         self.data_classes = os.listdir(folder_location)
         for data_class in self.data_classes:
-            for file in os.listdir(self.base_path + "/" + data_class):
-                self.data_class[self.base_path + "/" + data_class + "/" + file] = data_class
+            for file in os.listdir(self.base_path + file_deliminator + data_class):
+                for file_type in valid_image_file_formats:
+                    if file.endswith(file_type):
+                        self.data_class[self.base_path + file_deliminator + data_class + file_deliminator + file] = data_class
 
     def load_image_data(self):
         """
         Load the image data
         """
         for data_class in self.data_classes:
-            for file in os.listdir(self.base_path + "/" + data_class):
-                self.data[self.base_path + "/" + data_class + "/" + file] = Image.open()
+            for file in os.listdir(self.base_path + file_deliminator + data_class):
+                self.data[self.base_path + file_deliminator + data_class + file_deliminator + file] = Image.open()
 
     def is_datafiles_all_same_dim(self):
         img_size = (-1, -1)
