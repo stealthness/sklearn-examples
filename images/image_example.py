@@ -6,6 +6,8 @@ import numpy as np
 import skimage.color
 from matplotlib import image
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
 from sw_path import WORK_ROOT
 
 
@@ -42,3 +44,24 @@ display_img(WORK_ROOT+'RES\TestFolder\Cars\car1.jpg')
 c_img = image.imread('lenna.png')
 bw_img = skimage.color.rgb2gray(c_img);
 display_plot(bw_img,'bw car', cmap='gray')
+
+
+# messing about with scalers
+fig, (sub1, sub2)= plt.subplots(1,2)
+
+hist = np.hstack(bw_img.flatten())
+sub1.hist(hist)
+sub1.set_title('Original data unscaled')
+
+
+scaler = StandardScaler()
+# th
+bw_img = scaler.fit_transform(bw_img)
+print(f'the image BW Scaled Lenna is of type {bw_img.dtype}')
+
+hist = np.hstack(bw_img.flatten())
+sub2.hist(hist)
+sub2.set_title('Scaled in Guassian distribution')
+plt.show()
+
+# here we can see that the
