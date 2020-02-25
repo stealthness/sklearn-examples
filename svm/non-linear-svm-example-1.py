@@ -27,8 +27,7 @@ plt.imshow(Z, interpolation='nearest',
 # adding the dashed contour lines
 contours = plt.contour(xx, yy, Z, levels=[0], linewidths=2,
                       linestyles='dashed')
-plt.scatter(X[:, 0], X[:, 1], s=30, c=Y, cmap=plt.cm.Paired,
-            edgecolors='k')
+plt.scatter(X[:, 0], X[:, 1], s=30, c=Y, cmap=plt.cm.Paired, edgecolors='k')
 plt.xticks(())
 plt.yticks(())
 plt.axis([-3, 3, -3, 3])
