@@ -30,7 +30,7 @@ def main():
     full_mask = np.array([True] * 64)
     print(f'Full mask is : \n{mask_visual_string(full_mask, digit_shape)}\n')
 
-    empty_mask = np.array([False] * 64)
+    empty_mask = bool_not(full_mask)
     print(f'Empty mask is : \n{mask_visual_string(empty_mask, digit_shape)}\n')
 
     left_half_mask = np.array(([True]*4 +[False]*4)*8)
@@ -44,6 +44,16 @@ def main():
 
     bottom_half_mask = bool_not(top_half_mask)
     print(f'bottom half mask is : \n{mask_visual_string(bottom_half_mask, digit_shape)}\n')
+
+    far_left_quarter_mask = np.array(([True]*2 +[False]*6)*8)
+    near_left_quarter_mask = np.roll(far_left_quarter_mask, 2)
+    near_right_quarter_mask = np.roll(far_left_quarter_mask, 4)
+    far_right_quarter_mask = np.roll(far_left_quarter_mask, 6)
+    
+    print(f'far_left_quarter_mask is : \n{mask_visual_string(far_left_quarter_mask, digit_shape)}\n')
+    print(f'near_left_quarter_mask is : \n{mask_visual_string(near_left_quarter_mask, digit_shape)}\n')
+    print(f'far_right_quarter_mask is : \n{mask_visual_string(far_right_quarter_mask, digit_shape)}\n')
+    print(f'near_right_quarter_mask is : \n{mask_visual_string(near_right_quarter_mask, digit_shape)}\n')
 
 
 
