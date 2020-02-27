@@ -26,23 +26,26 @@ def mask_visual_string(mask, shape):
 
 
 def main():
+    N = 8
+    M = 8
+    S = N*M
     digit_shape = [8, 8]
-    full_mask = np.array([True] * 64)
+
+    full_mask = np.array([True] * S)
     print(f'Full mask is : \n{mask_visual_string(full_mask, digit_shape)}\n')
 
     empty_mask = bool_not(full_mask)
     print(f'Empty mask is : \n{mask_visual_string(empty_mask, digit_shape)}\n')
 
-    left_half_mask = np.array(([True]*4 +[False]*4)*8)
-    print(f'left half mask is : \n{mask_visual_string(left_half_mask, digit_shape)}\n')
-
+    left_half_mask = np.array(([True]*(N//2) +[False]*(N//2))*(S//M))
     right_half_mask = bool_not(left_half_mask)
-    print(f'right half mask is : \n{mask_visual_string(right_half_mask, digit_shape)}\n')
 
     top_half_mask = np.array([True]*32 +[False]*32)
-    print(f'top half mask is : \n{mask_visual_string(top_half_mask, digit_shape)}\n')
-
     bottom_half_mask = bool_not(top_half_mask)
+
+    print(f'left half mask is : \n{mask_visual_string(left_half_mask, digit_shape)}\n')
+    print(f'right half mask is : \n{mask_visual_string(right_half_mask, digit_shape)}\n')
+    print(f'top half mask is : \n{mask_visual_string(top_half_mask, digit_shape)}\n')
     print(f'bottom half mask is : \n{mask_visual_string(bottom_half_mask, digit_shape)}\n')
 
     far_left_quarter_mask = np.array(([True]*2 +[False]*6)*8)
