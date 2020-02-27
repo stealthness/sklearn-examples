@@ -18,7 +18,7 @@ class Test(TestCase):
                     for i in range(int(parts[1])):
                         bits = file.readline().strip().split(',')
                         exp = get_mask_from_string(bits[0])
-                        print(f'len {len(bits)}  and bits is {bits}')
+                        # print(f'len {len(bits)}  and bits is {bits}')
                         if len(bits) == 2:
                             act = function(get_mask_from_string(bits[1]))
                         else:
@@ -51,3 +51,8 @@ class Test(TestCase):
 
     def test_case_3_and_with_array_size_3(self):
         self.run_test_case('testcase:3and', TEST_CASE_FILE, bool_and)
+
+    def test_case_4_and_with_array_size_4(self):
+        self.run_test_case('testcase:4and', TEST_CASE_FILE, bool_and)
+    def test_case_4_or_with_array_size_4(self):
+        self.run_test_case('testcase:4and', TEST_CASE_FILE, bool_and)

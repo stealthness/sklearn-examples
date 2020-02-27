@@ -3,14 +3,12 @@ Test case for boolean masks
 """
 import unittest
 import random
-
 import numpy as np
-
 from boolmask_experiment.boolean_mask import mask_to_string, get_mask_from_string, get_mask, bool_and, bool_or, \
     bool_xor, bool_not
 
+LOGGING = False
 MASK_SIZE = 16
-
 
 class TestBooleanMasks(unittest.TestCase):
 
@@ -47,7 +45,8 @@ class TestBooleanMasks(unittest.TestCase):
         b = bool_and(get_mask(MASK_SIZE, type='random'), get_mask(MASK_SIZE, type='random'))
         for i in range(100):
             b = bool_and(b, get_mask(MASK_SIZE, type='random'))
-        print(f'After multiple operation we have {b}')
+            if LOGGING:
+                print(f'After multiple operation we have {b}')
         self.assertTrue(True)
 
     def test_random_boolean_operator_and_mask_repetitively (self):
@@ -61,7 +60,8 @@ class TestBooleanMasks(unittest.TestCase):
                 b = function(b)
             else:
                 b = function(b, get_mask(MASK_SIZE, type='random'))
-        print(f'After multiple operation we have {b}')
+        if LOGGING:
+            print(f'After multiple operation we have {b}')
         self.assertTrue(True)
 
 
