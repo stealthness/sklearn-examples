@@ -1,0 +1,48 @@
+"""
+The pupose of this script is to demonstrate the numpy array rolling
+"""
+import numpy as np
+
+# 1 dimensional rolling
+
+my_vector = np.array([-18, -4, 0, 2, 21, 37, 105])
+
+print(f'rolling my_vector by 1 gives \n : {np.roll(my_vector, 1)}')
+# note that 105 is now at the begining of the outputted array
+
+# However the original array is not altered
+print(f'The original my_vector remains \n : {my_vector}')
+
+# we can roll negatively
+print(f'rolling my_vector by -2 gives \n : {np.roll(my_vector, -2)}')
+
+# roll by more than the length of the arrays, it will just roll around again
+print(f'rolling my_vector by -7 gives (same as -2) \n : {np.roll(my_vector, -2 + my_vector.size)}')
+
+# 2 dim rolling, more care is needed
+
+my_matrix = np.arange(18).reshape([2,9])
+print(f'my_matrix is\n{my_matrix}')
+
+# lets roll the the matrix by 3 withoput sp[ecifing the axis
+print(f'my_matrix rolled by 3 becomes\n{np.roll(my_matrix, 3)}')
+# Note that the defalt will roll the array by flatterning roll it like 1 dimensional array, and then reshape it
+
+#we can specifying a axis to roll on by default it is
+print(f'my_matrix rolled by 3 on axis 0 becomes\n{np.roll(my_matrix, 3, axis=0)}')
+
+#we can specifying a axis to roll on by default it is
+print(f'my_matrix rolled by 3 on axis 1 becomes\n{np.roll(my_matrix, 3, axis=1)}')
+
+my_matrix = np.arange(18).reshape([6,3])
+print(f'my_matrix is\n{my_matrix}')
+
+# lets roll the the matrix by 3 withoput sp[ecifing the axis
+print(f'my_matrix rolled by 8 becomes\n{np.roll(my_matrix, 8)}')
+# Note that the defalt will roll the array by flatterning roll it like 1 dimensional array, and then reshape it
+
+#we can specifying a axis to roll on by default it is
+print(f'my_matrix rolled by 2 on axis 0 becomes\n{np.roll(my_matrix, 2, axis=0)}')
+
+#we can specifying a axis to roll on by default it is
+print(f'my_matrix rolled by 1 on axis 1 becomes\n{np.roll(my_matrix, 1, axis=1)}')
