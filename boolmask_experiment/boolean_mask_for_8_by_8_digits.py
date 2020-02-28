@@ -28,9 +28,6 @@ def mask_visual_string(mask: np.array, shape: tuple) -> str:
     return sb
 
 
-
-
-
 ROW_DEPTH = 8
 COLUMN_WIDTH = 8
 S = ROW_DEPTH * COLUMN_WIDTH
