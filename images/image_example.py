@@ -7,12 +7,12 @@ import skimage.color
 from matplotlib import image
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
-
 from sw_path import WORK_ROOT
 
 
 def get_file_name(file):
     return (file.split('//')[-1]).split('.')[0]
+
 
 def display_plot(plt_img, plt_name, **kwargs):
     if 'cmap' in kwargs:

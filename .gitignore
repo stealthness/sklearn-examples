@@ -1,5 +1,5 @@
 .idea/
-
+.sw_path.py
 *.iml
 *.xml
 res/
