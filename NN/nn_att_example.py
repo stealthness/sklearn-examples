@@ -5,6 +5,7 @@ from random import randint
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets, neighbors
+import time
 
 # import the data
 from sklearn.ensemble import RandomForestClassifier
@@ -26,7 +27,11 @@ number_of_classes = np.unique(faces.target).size
 # select a face at random
 selected_face = randint(0, data_size)
 
+# show the face
 plt.imshow(faces.images[selected_face], cmap='gray')
+ax = plt.gca()
+ax.set_axis_off()
+plt.title('Random Face')
 plt.show()
 
 # We can see that the images have been normalised
@@ -35,30 +40,33 @@ v_max = faces.data.max()
 
 print(f'The max and min values are {v_min}, {v_max} respectively')
 
-array_of_image_aveges = np.mean(faces.data, axis=1)
-print(f'If create array of the average value of each image we see that min/max vales are '
-      f'{array_of_image_aveges.min():.4f}, {array_of_image_aveges.max():.4f} respectively, '
+array_of_image_averages = np.mean(faces.data, axis=1)
+print(f'If create array of the average value of each image we see that min/max vales are,\n'
+      f'{array_of_image_averages.min():.4f},\n {array_of_image_averages.max():.4f}\vrespectively, '
       f'therefore the images are not balance')
 
-# split the intop training and testing sets, to make sure that we have equal amount in each classifiction we use
+
+# split the top into training and testing sets, to make sure that we have equal amount in each classifiction we use
 # option "stratify=faces.target"
 x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, stratify=faces.target, test_size=0.2,
                                                     random_state=RANDOM_STATE)
 
+
 # show that we have 2 examples of class in the test data split
 histogram_y_test = np.histogram(y_test, np.unique(faces.target))
-print(f'the histogram of y_test is {histogram_y_test}')
+print(f'The histogram of y_test is\n{histogram_y_test}\n')
 
 
 def get_results(X_train, X_test, Y_train, **kwargs):
     # Create the classifiers
     if kwargs['clf'] == 'MLP':
         clf = MLPClassifier(solver=kwargs['solver'], max_iter=500, hidden_layer_sizes=(8, 3), random_state=RANDOM_STATE)
-    elif kwargs['clf']=='NN':
+    elif kwargs['clf'] == 'NN':
         clf = KNeighborsClassifier(n_neighbors=10)
-    elif kwargs['clf']=='ECOC':
-        #clf = OutputCodeClassifier(LinearSVC(random_state=RANDOM_STATE, max_iter=500), code_size=20, random_state=RANDOM_STATE)
+    elif kwargs['clf'] == 'ECOC':
         clf = OutputCodeClassifier(estimator=RandomForestClassifier(random_state=RANDOM_STATE, n_estimators=100), code_size=20, random_state=RANDOM_STATE)
+    elif kwargs['clf'] == 'ECOC' and kwargs['RF']:
+        clf = OutputCodeClassifier(LinearSVC(random_state=RANDOM_STATE, max_iter=500), code_size=20, random_state=RANDOM_STATE)
     else:
         raise Exception('No classifier selected')
     # fit the classifier
@@ -72,9 +80,12 @@ y_pred = []
 # y_pred.append(get_results(x_train, x_test, y_train, clf='MLP', solver='sgd'))
 # y_pred.append(get_results(x_train, x_test, y_train, clf='MLP', solver='adam'))
 # y_pred.append(get_results(x_train, x_test, y_train, clf='NN'))
+tic = time.perf_counter()
 y_pred.append(get_results(x_train, x_test, y_train, clf='ECOC'))
+tok = time.perf_counter()
 
 print(f'The accuracy is {accuracy_score(y_test, y_pred[0])}')
+print(f"Performed in {toc - tic:0.4f} seconds")
 #print(f'The accuracy is {accuracy_score(y_test, y_pred[1])}')
 #print(f'The accuracy is {accuracy_score(y_test, y_pred[2])}')
 #print(f'The accuracy is {accuracy_score(y_test, y_pred[3])}')
