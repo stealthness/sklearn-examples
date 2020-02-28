@@ -10,11 +10,22 @@ from sklearn.preprocessing import StandardScaler
 from sw_path import WORK_ROOT
 
 
-def get_file_name(file):
+def get_file_name(file: str) -> str:
+    """
+    Returns the filename from a give resource string
+    :param file:
+    :return:
+    """
     return (file.split('//')[-1]).split('.')[0]
 
 
 def display_plot(plt_img, plt_name, **kwargs):
+    """
+    Displays the plot of an image
+    :param plt_img: the image to be plotted
+    :param plt_name: the name of the image to be displayed in the plot
+    :param kwargs:
+    """
     if 'cmap' in kwargs:
         plt.imshow(plt_img, cmap=kwargs['cmap'])
     else:
@@ -31,7 +42,7 @@ def display_img(file_input):
     print(f'the image {name} is of type {img.dtype}')
     print(f'the image {name} has the min/max values {np.min(img):.4f}/{np.max(img):.4f}')
     print(f'The image {name} has the shape {img.shape}')
-    display_plot(img,name)
+    display_plot(img, name)
 
 
 # Load an image from this folder
