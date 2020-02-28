@@ -1,5 +1,7 @@
 """
 Purpos of this file is explore MLP on ATT/ORL dataset
+
+WARNING this file may take more than 5 mins to run
 """
 from random import randint
 import matplotlib.pyplot as plt
@@ -82,7 +84,7 @@ y_pred = []
 # y_pred.append(get_results(x_train, x_test, y_train, clf='NN'))
 tic = time.perf_counter()
 y_pred.append(get_results(x_train, x_test, y_train, clf='ECOC'))
-tok = time.perf_counter()
+toc = time.perf_counter()
 
 print(f'The accuracy is {accuracy_score(y_test, y_pred[0])}')
 print(f"Performed in {toc - tic:0.4f} seconds")
