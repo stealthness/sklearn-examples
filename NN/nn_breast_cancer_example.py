@@ -25,14 +25,18 @@ x_train, x_test, y_train, y_test = train_test_split(breast.data, breast.target, 
 clf_1 = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=42)
 clf_2 = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=42)
 
+# train the classifier with training data
 clf_1.fit(x_train, y_train)
 clf_2.fit(x_train, y_train)
 
+# find y_pred prediction best on x_test data
 y_pred_1 = clf_1.predict(x_test)
 y_pred_2 = clf_2.predict(x_test)
 
+# calculate accuracy of y_pred using y_test
 print(f'accuracy {accuracy_score(y_test, y_pred_1)}')
 print(f'accuracy {accuracy_score(y_test, y_pred_2)}')
 
+# use classification_report function to print more information
 print(f'\n\nClassification report for MLPClassifier is\n {classification_report(y_test, y_pred_2)}')
 print(f'\n\nClassification report for MLPClassifierOutpuCodeClassifier is\n {classification_report(y_test, y_pred_2)}')
