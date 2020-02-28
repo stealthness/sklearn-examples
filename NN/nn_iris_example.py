@@ -16,18 +16,24 @@ from sklearn.svm import LinearSVC
 iris = datasets.load_iris()
 x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
 
+# create a dictionary of classifiers
+classifiers = {}
 # creating a classification
-clf_1 = MLPClassifier(solver='lbfgs', max_iter=500, alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=42)
-clf_2 = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=42)
+classifiers["MLP"] = MLPClassifier(solver='lbfgs', max_iter=500, alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=42)
+classifiers["LinSVC"] = OutputCodeClassifier(LinearSVC(random_state=0), code_size=2, random_state=42)
 
-clf_1.fit(x_train, y_train)
-clf_2.fit(x_train, y_train)
+# training the classifiers
+classifiers["MLP"].fit(x_train, y_train)
+classifiers["LinSVC"].fit(x_train, y_train)
 
-y_pred_1 = clf_1.predict(x_test)
-y_pred_2 = clf_2.predict(x_test)
+# creating a prediction dictionary
+predictions = {}
+# finding prediction using test data
+predictions["MLP"] = classifiers["MLP"].predict(x_test)
+predictions["LinSVC"] = classifiers["MLP"].predict(x_test)
 
-print(f'accuracy {accuracy_score(y_test, y_pred_1)}')
-print(f'accuracy {accuracy_score(y_test, y_pred_2)}')
+print(f'accuracy {accuracy_score(y_test, predictions["MLP"] )}')
+print(f'accuracy {accuracy_score(y_test, predictions["LinSVC"])}')
 
-print(f'\n\nClassification report for MLPClassifier is\n {classification_report(y_test, y_pred_2)}')
-print(f'\n\nClassification report for MLPClassifierOutpuCodeClassifier is\n {classification_report(y_test, y_pred_2)}')
+print(f'\n\nClassification report for MLPClassifier is\n {classification_report(y_test, predictions["MLP"] )}')
+print(f'\n\nClassification report for MLPClassifierOutpuCodeClassifier is\n {classification_report(y_test, predictions["LinSVC"] )}')
