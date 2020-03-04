@@ -1,4 +1,4 @@
-from sw_data_loader.SWData import SWData
+from sw_data_loader.SWDataClassFile import SWData
 import sw_path
 print("run test")
 data = SWData()

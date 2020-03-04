@@ -1,4 +1,4 @@
-from sw_data_loader.SWData import SWData
+from sw_data_loader.SWDataClassFile import SWData
 
 print("run home")
 data = SWData()

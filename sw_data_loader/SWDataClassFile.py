@@ -4,7 +4,8 @@ from PIL import Image
 
 file_deliminator = "//"
 
-valid_image_file_formats = {'png','jpg'}
+valid_image_file_formats = {'png', 'jpg'}
+
 
 class SWData:
     data_img = {}
@@ -26,7 +27,8 @@ class SWData:
             for file in os.listdir(self.base_path + file_deliminator + data_class):
                 for file_type in valid_image_file_formats:
                     if file.endswith(file_type):
-                        self.data_class[self.base_path + file_deliminator + data_class + file_deliminator + file] = data_class
+                        self.data_class[
+                            self.base_path + file_deliminator + data_class + file_deliminator + file] = data_class
 
     def load_image_data(self):
         """
