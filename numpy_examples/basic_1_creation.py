@@ -48,9 +48,9 @@ print(f'the length of b is {b.size}')
 print(f'the shape of b is {b.shape}')
 
 # we can create using linspace, numpy uses [] set theory
-l1 = np.linspace(5,15,9);
+l1 = np.linspace(5,15,9)
 print(f'np.linspace(5,15,9) is {l1}')
-l2 = np.linspace(5,15,9, retstep=True);
+l2 = np.linspace(5,15,9, retstep=True)
 # creates array of (l1, step_value)
 print(f'np.linspace(5,15,9, retstep=True) is {l2}')
 

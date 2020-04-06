@@ -22,6 +22,9 @@ sub1.imshow(img)
 sub1.axis('off')
 sub1.set_title('Original Image of a Red Car')
 
+
+
+
 # create HoG
 fd, hog_img_1 = hog(img, orientations=8, pixels_per_cell=(16, 16),
                     cells_per_block=(1, 1), visualize=True, multichannel=True)
