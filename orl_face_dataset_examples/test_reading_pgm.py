@@ -39,6 +39,16 @@ When using these images, please give credit to AT&T Laboratories Cambridge.
 
 
 def read_images(path):
+    """
+    Reads all the images in from a given folder path locations. Assumes that the folder is structered as follows
+    folder_name
+    |-- class1_name_folder
+    |-- class2_name_folder
+    |
+    |-- classN_name_folder
+    :param path:
+    :return: A bunch object
+    """
     c = 0
     x = []
     y = []
@@ -71,7 +81,11 @@ data_shape = b.shape
 data_size = b.data.size
 print(f'The shape of the data is {data_shape}, that is there are {data_size} number of images')
 
-img = np.array(b.data[random.randint(0, 400-1)]).reshape(data_shape)
+for i in b.data:
+    print(i.shape)
+
+
+img = np.array(b.data[random.randint(0, 400-1)].reshape(data_shape))
 plt.imshow(img, cmap='gray')
 plt.show()
 fd, hog_img = hog(img, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=False)
