@@ -16,33 +16,42 @@ from skimage.feature import local_binary_pattern
 radius = 4
 n_points = 8 * radius
 
-# load a simple image of a car
 
-file = WORK_ROOT+'RES\TestFolder\Cars\car1.jpg'
-img = image.imread(file)
+def main():
 
-# details of the image
-name = 'Red Car'
-print(f'the image {name} is of type {img.dtype}')
-print(f'the image {name} has the min/max values {np.min(img):.4f}/{np.max(img):.4f}')
-print(f'The image {name} has the shape {img.shape}')
-print(f'the image {name} has size {img.size}')
+    # load a simple image of a car
+
+    file = WORK_ROOT+'RES\TestFolder\Cars\car1.jpg'
+    color_img = image.imread(file)
+
+    # details of the image
+    print_car_details('Red Car', color_img)
+
+    # Applying the lbp to a color image
+    #fd = local_binary_pattern(img, n_points, radius, method='uniform')
 
 
-# Applying the lbp to a color image
-#fd = local_binary_pattern(img, n_points, radius, method='uniform')
+    # Applying to Black and White img
+    bw_img = skimage.color.rgb2gray(color_img);
+    bw_fd = local_binary_pattern(bw_img, n_points, radius, method='uniform')
 
-# Applying to Black and White img
+    print_car_details("BW Red Car", bw_img)
 
-bw_img = skimage.color.rgb2gray(img);
-bw_fd = local_binary_pattern(bw_img, n_points, radius, method='uniform')
+    # properties of fd
+    print(f'the feature vector is of type {bw_fd.dtype}')
+    print(f'the feature vector has the min/max values {np.min(bw_fd):.4f}/{np.max(bw_fd):.4f}')
 
-name = 'BW Red Car'
-print(f'the image {name} is of type {bw_img.dtype}')
-print(f'the image {name} has the min/max values {np.min(bw_img):.4f}/{np.max(bw_img):.4f}')
-print(f'The image {name} has the shape {bw_img.shape}')
-print(f'the image {name} has size {bw_img.size}')
 
-# properties of fd
-print(f'the feature vector is of type {bw_fd.dtype}')
-print(f'the feature vector has the min/max values {np.min(bw_fd):.4f}/{np.max(bw_fd):.4f}')
+def print_car_details(title: str, img: np.ndarray):
+    """
+    Prints the details of an image
+    :param title: Title of the image
+    :param img: an image in an np.ndarray
+    """
+    print(f'the image {title} is of type {img.dtype}')
+    print(f'the image {title} has the min/max values {np.min(img):.4f}/{np.max(img):.4f}')
+    print(f'The image {title} has the shape {img.shape}')
+    print(f'the image {title} has size {img.size}\n')
+
+
+main()
