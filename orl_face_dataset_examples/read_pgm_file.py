@@ -39,9 +39,9 @@ def read_pgm(filename):
     return shape, max_value, np.array(d)
 
 
-sh, mv,  img = read_pgm(WORK_ROOT+'RES\\ATT\\s1\\1.pgm')
+sh, mv,  img = read_pgm(WORK_ROOT+'RES\\ORL\\s1\\1.pgm')
 
 plt.imshow(img.reshape(sh), cmap='gray')
 plt.axis('off')
-plt.title('An Example of the ATT image')
+plt.title('An Example of the ORL(aka ATT) image')
 plt.show()
