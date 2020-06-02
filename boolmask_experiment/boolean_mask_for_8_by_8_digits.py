@@ -27,6 +27,7 @@ def mask_visual_string(mask: np.array, shape: tuple) -> str:
         sb += " ".join(element_list) + "\n"
     return sb
 
+# set constant values
 
 ROW_DEPTH = 8
 COLUMN_WIDTH = 8

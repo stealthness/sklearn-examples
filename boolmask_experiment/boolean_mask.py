@@ -1,5 +1,6 @@
 """
-The purpos of the file is create a bunch of boolean mask that I will then use for
+The purpose of the file is to create a set of boolean masks that I will then use for
+selecting sections of an image.
 """
 import numpy as np
 
@@ -25,7 +26,9 @@ def get_mask(size: int, **kwargs) -> np.array:
 
 
 def get_mask_from_string(s: str):
-    """Returns numpy boolean array created from string representation"""
+    """Returns numpy boolean array created from string representation
+    Example; '1101' will return [True True False True]
+    """
     b = []
     for c in s:
         b.append(c == '1')
@@ -33,7 +36,8 @@ def get_mask_from_string(s: str):
 
 
 def mask_to_string(mask: np.array):
-    """Returns a string version of boolean np.array where True is 1, False is 0. Example [True, False, True] is '101'
+    """Returns a string version of boolean np.array where True is 1, False is 0.
+    Example; [True, False, True] will return '101'
     """
     sb = ""
     for b in mask:
@@ -64,7 +68,7 @@ def bool_or(arg_0, arg_1):
     if LOGGING:
         print(f'Logging : bool_or')
         print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
-        print(f'return type is {type(np.logical_or(arg_0, arg_1))}')
+        print(f'  return type is {type(np.logical_or(arg_0, arg_1))}')
     return np.logical_or(arg_0, arg_1)
 
 
@@ -73,5 +77,5 @@ def bool_xor(arg_0, arg_1):
     if LOGGING:
         print(f'Logging : bool_xor')
         print(f'  arg_0 is {type(arg_0)} val is {arg_0} \n  arg_1 is {type(arg_1)} val is {arg_1}')
-        print(f'return type is {type(np.logical_xor(arg_0, arg_1))}')
+        print(f'  return type is {type(np.logical_xor(arg_0, arg_1))}')
     return np.logical_xor(arg_0, arg_1)
