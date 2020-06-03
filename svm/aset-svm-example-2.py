@@ -49,6 +49,7 @@ def plot_contours(ax, clf, xx, yy, **params):
     out = ax.contourf(xx, yy, Z, **params)
     return out
 
+
 def create_plot(models, titles, axis, X):
     # Set-up 2x2 grid for plotting.
     fig, sub = plt.subplots(2, 2)

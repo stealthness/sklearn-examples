@@ -1,42 +1,44 @@
 """
 Purpose of this file is write and test a python program for reading in face images data
 """
+import os
 from PIL import Image
-
+from sw_path import WORK_ROOT as ROOT
 print(__doc__)
 
-IGNORE_FOLDES = ["README"]
+IGNORE_FOLDERS = ["README"]
 
-import os
 
-res_path = 'I:\RES'
-att_folder = 'ATT'
+res_path = ROOT + 'RES'
+att_folder = 'ORL'
 
-def count_folders(path):
+
+def count_folders(target_path):
     """
-    Returns the count of the folders exluding ignored folders
+    Returns the count of the folders in the target_path excluding files in the ignored folders
     """
-    ls = os.listdir(path)
-    for f in IGNORE_FOLDES:
-        if f in ls:
-            ls.remove(f)
-    return len(ls)
+    files_list = os.listdir(target_path)
+    for file in IGNORE_FOLDERS:
+        if file in files_list:
+            files_list.remove(file)
+    return len(files_list)
 
 
-
-print("count is "+ str(count_folders(res_path+"/"+att_folder)))
+print(f"count is {count_folders(res_path+'/'+att_folder)}")
 path = res_path+"/"+att_folder
 ls = os.listdir(path)
-for f in IGNORE_FOLDES:
+for f in IGNORE_FOLDERS:
     if f in ls:
         ls.remove(f)
 
 i = 0
-for dir in ls:
-    count = count_folders(path+"/"+dir)
-    print("number of files is {} in {}".format(count, path+"/"+dir))
+
+
+for dirs in ls:
+    count = count_folders(path+"/"+dirs)
+    print(f'number of files is {count} in {path+"/"+dirs}')
     X = [[]]
     X[i] = []
-    for s in os.listdir(path+"/"+dir):
-        im = Image.open(path+"/"+dir+"/"+s)
+    for s in os.listdir(path+"/"+dirs):
+        im = Image.open(path+"/"+dirs+"/"+s)
         X[i].append(im)

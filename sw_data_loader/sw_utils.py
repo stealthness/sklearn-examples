@@ -4,7 +4,7 @@ useful functions
 import csv
 
 import numpy as np
-import sw_path.WORK_ROOT as ROOT
+from sw_path import WORK_ROOT as ROOT
 
 
 def import_dataset(file=ROOT + 'RES\\ATT\\D.txt'):

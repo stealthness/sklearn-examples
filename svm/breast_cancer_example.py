@@ -1,5 +1,5 @@
-'''
-Cade based on https://www.datacamp.com/community/tutorials/svm-classification-scikit-learn-python
+"""
+Code is based on https://www.datacamp.com/community/tutorials/svm-classification-scikit-learn-python
 
 The dataset comprises 30 features (mean radius, mean texture, mean perimeter, mean area, mean smoothness, mean
 compactness, mean concavity, mean concave points, mean symmetry, mean fractal dimension, radius error, texture error,
@@ -8,7 +8,7 @@ fractal dimension error, worst radius, worst texture, worst perimeter, worst are
 worst concavity, worst concave points, worst symmetry, and worst fractal dimension) and a target (type of cancer).
 
 This data has two types of cancer classes: malignant (harmful) and benign (not harmful)
-'''
+"""
 from sklearn import datasets, metrics, svm
 from sklearn.model_selection import train_test_split
 
