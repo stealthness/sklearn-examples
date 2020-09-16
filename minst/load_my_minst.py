@@ -23,13 +23,13 @@ print("start")
 minst_training = Bunch()
 minst_test = Bunch()
 
-folder_path = (WORK_ROOT + "RES/MNIST/1kMNIST").replace("/", "\\")
+folder_path = (WORK_ROOT + "RES/MNIST/10k")
 
 if not os.path.isdir(folder_path):
     raise Exception("dir not found")
 
-test_path = folder_path+"\\test"
-training_path = folder_path+"\\training"
+test_path = folder_path+"/test"
+training_path = folder_path+"/training"
 
 minst_training.data = []
 minst_training.target = []
@@ -39,7 +39,7 @@ minst_test.target = []
 minst_test.target_names = []
 for i in range(10):
     # all image are located in dir with class name (number of the digit)
-    i_dir = f"\\{i}"
+    i_dir = f"/{i}"
     # training
     print(f"number of files in {i} dir {len(os.listdir(training_path + i_dir))}")
     # create file location
@@ -50,7 +50,7 @@ for i in range(10):
     # loop through the dir add each image to data
     for file in os.listdir(training_path+i_dir) :
         if file.endswith("png"):
-            minst_training.data.append(image.imread(file_location+"\\"+file))
+            minst_training.data.append(image.imread(file_location+"/"+file))
             minst_training.target.append(i)
 
     # testing
@@ -63,7 +63,7 @@ for i in range(10):
     # loop through the dir add each image to data
     for file in os.listdir(test_path + i_dir):
         if file.endswith("png"):
-            minst_test.data.append(image.imread(file_location+"\\"+file))
+            minst_test.data.append(image.imread(file_location+"/"+file))
             minst_test.target.append(i)
 
 

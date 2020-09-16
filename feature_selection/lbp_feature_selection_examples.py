@@ -27,11 +27,8 @@ def main():
     # details of the image
     print_car_details('Red Car', color_img)
 
-    # Applying the lbp to a color image
-    #fd = local_binary_pattern(img, n_points, radius, method='uniform')
-
-
-    # Applying to Black and White img
+    # Cannot apply lbp to a color image
+    # Applying lbp to Black and White img
     bw_img = skimage.color.rgb2gray(color_img);
     bw_fd = local_binary_pattern(bw_img, n_points, radius, method='uniform')
 

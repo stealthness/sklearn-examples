@@ -31,7 +31,7 @@ import numpy
 from deap import creator, gp, base, tools, algorithms
 from sw_path import WORK_ROOT
 
-with open(WORK_ROOT+'RES\\Spambase\\spambase.data') as spambase:
+with open(WORK_ROOT+'RES/Spambase/spambase.data') as spambase:
     spamReader = csv.reader(spambase)
     spam = list(list(float(elem) for elem in row) for row in spamReader)
 
