@@ -13,11 +13,9 @@ class MeanClassifier():
         self._classes = y
         self._set_of_classes = set(y)
         set_list = list(self._set_of_classes)
-        print(set_list)
         self._means = [None]*40
         count = [0]*40
         for i, (array_img, target) in enumerate(zip(X, y)):
-            print(f'i:{i}, target: {target}')
             index = set_list.index(target)
             count[index] += 1
             if self._means[index] is None:
@@ -33,11 +31,7 @@ class MeanClassifier():
         for x in X:
             dist = []
             for i in range(40):
-            #for i, mean_img in enumerate(self._means):
-                print(i)
                 dist.append(np.linalg.norm(self._means[i] - x))
-            #y_pred.append(list(self._set_of_classes)[dist.index(min(dist))])
-            print(f' index {dist.index(min(dist))}  - {list(self._set_of_classes)[dist.index(min(dist))]}')
             y_pred.append(list(self._set_of_classes)[dist.index(min(dist))])
         return y_pred
 
