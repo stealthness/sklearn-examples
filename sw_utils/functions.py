@@ -25,8 +25,9 @@ def test_double(x):
     return 2*x
 
 
-def imshow_mean_img(img, shape, title):
+def imshow_img_array(img, shape, title):
     plt.imshow(img.reshape(shape), cmap='gray')
+    plt.axis('off')
     plt.title(title)
     plt.show()
 

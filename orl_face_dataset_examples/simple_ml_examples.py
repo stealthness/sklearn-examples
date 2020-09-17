@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from sw_utils.mean_classification import MeanClassifier
 from sw_utils.silly_random_classification import SillyClassifier
-from sw_utils.functions import select_random_target, imshow_mean_img
+from sw_utils.functions import select_random_target, imshow_img_array
 
 
 def main():
@@ -54,8 +54,8 @@ def run_test_on_means(b):
 
     sd = d.index(min(d))
     print(d)
-    imshow_mean_img(test_img, b.shape, 'test img')
-    imshow_mean_img(orl_means[sd], b.shape, ' is it?')
+    imshow_img_array(test_img, b.shape, 'test img')
+    imshow_img_array(orl_means[sd], b.shape, ' is it?')
 
 
 def run_silly(b):
